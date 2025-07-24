@@ -51,5 +51,10 @@ public class EnemyController : MonoBehaviour
                 Destroy(collision.gameObject);
             }
         }
+
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            transform.Rotate(0, 0, -90);
+        }
     }
 }
