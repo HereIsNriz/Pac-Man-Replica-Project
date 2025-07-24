@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    //
+    public bool canAttackEnemy;
 
     [SerializeField] private float speed;
     [SerializeField] private Rigidbody2D playerRb;
-    private EnemyController enemy;
     private float playerRotation;
     private float enemyCooldown = 5.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        enemy = GameObject.Find("Enemy").GetComponent<EnemyController>();
+
     }
 
     // Update is called once per frame
@@ -50,7 +49,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Money"))
         {
             Destroy(collision.gameObject);
-            enemy.canBeAttacked = true;
+            canAttackEnemy = true;
             StartCoroutine(EnemyCoundownRoutine());
         }
     }
@@ -58,6 +57,6 @@ public class PlayerController : MonoBehaviour
     IEnumerator EnemyCoundownRoutine()
     {
         yield return new WaitForSeconds(enemyCooldown);
-        enemy.canBeAttacked = false;
+        canAttackEnemy= false;
     }
 }

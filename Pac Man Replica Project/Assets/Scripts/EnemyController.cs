@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public bool canBeAttacked;
-
     //
-
+    
+    [SerializeField] private Rigidbody2D enemyRb;
+    [SerializeField] private float speed;
+    private Vector2 startPos;
+    private PlayerController player;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        startPos = transform.position;
+
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -20,13 +25,23 @@ public class EnemyController : MonoBehaviour
         
     }
 
+    private void FixedUpdate()
+    {
+        EnemyMovement();
+    }
+
+    private void EnemyMovement()
+    {
+        enemyRb.velocity = transform.up * speed * Time.deltaTime;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (canBeAttacked)
+        if (player.canAttackEnemy)
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                Destroy(gameObject);
+                transform.position = startPos;
             }
         }
         else
