@@ -8,13 +8,15 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float speed;
     [SerializeField] private Rigidbody2D playerRb;
+    private GameManager gameManager;
     private float playerRotation;
     private float enemyCooldown = 5.0f;
+    private int scoreFromMoney = 25;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -49,6 +51,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Money"))
         {
             Destroy(collision.gameObject);
+            gameManager.UpdateScore(scoreFromMoney);
             canAttackEnemy = true;
             StartCoroutine(EnemyCoundownRoutine());
         }

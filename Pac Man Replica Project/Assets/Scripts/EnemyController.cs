@@ -10,6 +10,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float speed;
     private Vector2 startPos;
     private PlayerController player;
+    private GameManager gameManager;
+    private int scoreFromEnemy = 50;
     
     // Start is called before the first frame update
     void Start()
@@ -17,6 +19,7 @@ public class EnemyController : MonoBehaviour
         startPos = transform.position;
 
         player = GameObject.Find("Player").GetComponent<PlayerController>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -27,7 +30,10 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        EnemyMovement();
+        if (gameManager.gameRunning)
+        {
+            EnemyMovement();
+        }
     }
 
     private void EnemyMovement()
@@ -42,6 +48,7 @@ public class EnemyController : MonoBehaviour
             if (collision.gameObject.CompareTag("Player"))
             {
                 transform.position = startPos;
+                gameManager.UpdateScore(scoreFromEnemy);
             }
         }
         else
@@ -49,6 +56,7 @@ public class EnemyController : MonoBehaviour
             if (collision.gameObject.CompareTag("Player"))
             {
                 Destroy(collision.gameObject);
+                gameManager.GameOver();
             }
         }
 
