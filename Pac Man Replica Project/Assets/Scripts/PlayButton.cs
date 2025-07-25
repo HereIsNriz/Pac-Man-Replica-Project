@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class PlayButton : MonoBehaviour
 {
+
+    [SerializeField] private AudioSource startingGameSound;
+    private float delay = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +23,14 @@ public class PlayButton : MonoBehaviour
 
     public void PlayGame()
     {
+        startingGameSound.Play();
+        StartCoroutine(DelayBeforePlay());
+    }
+
+    IEnumerator DelayBeforePlay()
+    {
+        yield return new WaitForSeconds(delay);
+
         SceneManager.LoadScene("Main Game");
     }
 }
