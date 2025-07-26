@@ -54,9 +54,11 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        if (collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Enemy"))
         {
-            transform.Rotate(0, 0, -90);
+            float enemyRotateAmount = Random.Range(0, 2) == 0 ? 90 : -90;
+
+            transform.Rotate(0, 0, enemyRotateAmount);
         }
     }
 }

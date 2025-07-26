@@ -42,13 +42,14 @@ public class GameManager : MonoBehaviour
                 gamePaused = true;
                 pausePanel.SetActive(true);
             }
-            else if (Input.GetKeyDown(KeyCode.P) && gamePaused)
-            {
-                Time.timeScale = 1;
-                gamePaused = false;
-                pausePanel.SetActive(false);
-            }
         }
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        gamePaused = false;
+        pausePanel.SetActive(false);
     }
 
     public void UpdateScore(int scoreToAdd)
