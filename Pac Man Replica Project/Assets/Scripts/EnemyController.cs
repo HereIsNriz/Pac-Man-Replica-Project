@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
     //
     
     [SerializeField] private Rigidbody2D enemyRb;
+    [SerializeField] private AudioSource enemyDeadSound;
     [SerializeField] private float speed;
     private Vector2 startPos;
     private PlayerController player;
@@ -47,6 +48,7 @@ public class EnemyController : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Player"))
             {
+                enemyDeadSound.PlayOneShot(enemyDeadSound.clip);
                 transform.position = startPos;
                 gameManager.UpdateScore(scoreFromEnemy);
             }

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D playerRb;
     [SerializeField] private AudioSource collectMoneySound;
     [SerializeField] private AudioSource collectCoinSound;
+    [SerializeField] private AudioSource playerDeadSound;
     [SerializeField] private float speed;
     private GameManager gameManager;
     private Vector2 startingPos;
@@ -80,6 +81,7 @@ public class PlayerController : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Enemy"))
             {
+                playerDeadSound.PlayOneShot(playerDeadSound.clip);
                 transform.position = startingPos;
                 transform.rotation = Quaternion.identity;
                 // substract lives
