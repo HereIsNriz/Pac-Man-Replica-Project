@@ -51,14 +51,6 @@ public class EnemyController : MonoBehaviour
                 gameManager.UpdateScore(scoreFromEnemy);
             }
         }
-        else
-        {
-            if (collision.gameObject.CompareTag("Player"))
-            {
-                Destroy(collision.gameObject);
-                gameManager.GameOver();
-            }
-        }
 
         if (collision.gameObject.CompareTag("Wall"))
         {

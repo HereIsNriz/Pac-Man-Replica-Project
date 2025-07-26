@@ -6,9 +6,12 @@ public class PlayerController : MonoBehaviour
 {
     public bool canAttackEnemy;
 
-    [SerializeField] private float speed;
     [SerializeField] private Rigidbody2D playerRb;
+    [SerializeField] private AudioSource collectMoneySound;
+    [SerializeField] private AudioSource collectCoinSound;
+    [SerializeField] private float speed;
     private GameManager gameManager;
+    private Vector2 startingPos;
     private float playerRotation;
     private float enemyCooldown = 5.0f;
     private int scoreFromMoney = 25;
@@ -16,6 +19,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        startingPos = transform.position;
+
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
@@ -50,10 +55,16 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Money"))
         {
+            collectMoneySound.PlayOneShot(collectMoneySound.clip);
             Destroy(collision.gameObject);
             gameManager.UpdateScore(scoreFromMoney);
             canAttackEnemy = true;
             StartCoroutine(EnemyCoundownRoutine());
+        }
+
+        if (collision.gameObject.CompareTag("Coin"))
+        {
+            collectCoinSound.PlayOneShot(collectCoinSound.clip);
         }
     }
 
@@ -61,5 +72,18 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(enemyCooldown);
         canAttackEnemy= false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!canAttackEnemy)
+        {
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                transform.position = startingPos;
+                transform.rotation = Quaternion.identity;
+                // substract lives
+            }
+        }
     }
 }
