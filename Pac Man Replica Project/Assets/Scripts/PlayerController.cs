@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,17 +11,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioSource collectMoneySound;
     [SerializeField] private AudioSource collectCoinSound;
     [SerializeField] private AudioSource playerDeadSound;
+    [SerializeField] private TextMeshProUGUI livesText;
     [SerializeField] private float speed;
     private GameManager gameManager;
     private Vector2 startingPos;
     private float playerRotation;
     private float enemyCooldown = 5.0f;
     private int scoreFromMoney = 25;
+    private int lives = 3;
+    private int livesSubstracted = 1;
 
     // Start is called before the first frame update
     void Start()
     {
         startingPos = transform.position;
+        livesText.text = $"Lives: {lives}";
 
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
@@ -33,7 +38,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        PlayerMovement();
+        if (gameManager.gameRunning)
+        {
+            PlayerMovement();
+        }
     }
 
     private void PlayerMovement()
@@ -84,8 +92,23 @@ public class PlayerController : MonoBehaviour
                 playerDeadSound.PlayOneShot(playerDeadSound.clip);
                 transform.position = startingPos;
                 transform.rotation = Quaternion.identity;
-                // substract lives
+                SubstractLives(livesSubstracted);
             }
+        }
+    }
+
+    private void SubstractLives(int livesToSubstract)
+    {
+        if (lives > 0)
+        {
+            lives -= livesToSubstract;
+            livesText.text = $"Lives: {lives}";
+        }
+
+        if (lives == 0)
+        {
+            lives = 0;
+            gameManager.GameOver();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,9 +11,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private AudioSource backToLobbySound;
     private int score;
     private int startingScore = 0;
     private bool gamePaused;
+    private float delay = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -55,7 +59,20 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.Log("Game Over!");
+        gameOverPanel.SetActive(true);
         gameRunning = false;
+    }
+
+    public void BackToLobby()
+    {
+        backToLobbySound.PlayOneShot(backToLobbySound.clip, 1f);
+        StartCoroutine(DelayBeforeBack());
+    }
+
+    IEnumerator DelayBeforeBack()
+    {
+        yield return new WaitForSeconds(delay);
+
+        SceneManager.LoadScene("Lobby");
     }
 }
