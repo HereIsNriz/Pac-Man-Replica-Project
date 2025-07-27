@@ -4783,6 +4783,18 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8038150201948453341, guid: ec5ba5bab40bc054fa70f679da89b548, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8038150201948453341, guid: ec5ba5bab40bc054fa70f679da89b548, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8038150201948453341, guid: ec5ba5bab40bc054fa70f679da89b548, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8038150201948453341, guid: ec5ba5bab40bc054fa70f679da89b548, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.25
       objectReference: {fileID: 0}
@@ -8718,6 +8730,18 @@ PrefabInstance:
     - target: {fileID: 357143015616316220, guid: ec5ba5bab40bc054fa70f679da89b548, type: 3}
       propertyPath: enemyTurn
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8038150201948453341, guid: ec5ba5bab40bc054fa70f679da89b548, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8038150201948453341, guid: ec5ba5bab40bc054fa70f679da89b548, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8038150201948453341, guid: ec5ba5bab40bc054fa70f679da89b548, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8038150201948453341, guid: ec5ba5bab40bc054fa70f679da89b548, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19731,6 +19755,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8038150201948453341, guid: ec5ba5bab40bc054fa70f679da89b548, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8038150201948453341, guid: ec5ba5bab40bc054fa70f679da89b548, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8038150201948453341, guid: ec5ba5bab40bc054fa70f679da89b548, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8038150201948453341, guid: ec5ba5bab40bc054fa70f679da89b548, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -23,8 +23,15 @@ public class PlayButton : MonoBehaviour
 
     public void PlayGame()
     {
-        startingGameSound.Play();
+        startingGameSound.PlayOneShot(startingGameSound.clip, 1f);
         StartCoroutine(DelayBeforePlay());
+    }
+
+    public void ExitGame()
+    {
+        // Application.Quit();
+        startingGameSound.PlayOneShot(startingGameSound.clip, 1f);
+        StartCoroutine(DelayBeforeExitting());
     }
 
     IEnumerator DelayBeforePlay()
@@ -32,5 +39,12 @@ public class PlayButton : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         SceneManager.LoadScene("Main Game");
+    }
+
+    IEnumerator DelayBeforeExitting()
+    {
+        yield return new WaitForSeconds(delay);
+
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 }
