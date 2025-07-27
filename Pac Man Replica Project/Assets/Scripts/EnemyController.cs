@@ -9,9 +9,11 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Rigidbody2D enemyRb;
     [SerializeField] private AudioSource enemyDeadSound;
     [SerializeField] private float speed;
+    [SerializeField] private int enemyTurn;
     private Vector2 startPos;
     private PlayerController player;
     private GameManager gameManager;
+    private float enemyTimeTurn = 0f;
     private int scoreFromEnemy = 50;
     
     // Start is called before the first frame update
@@ -26,12 +28,20 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        enemyTimeTurn += Time.deltaTime;
+
+        if (!gameManager.gameRunning)
+        {
+            speed = 0;
+            enemyRb.velocity = Vector3.zero;
+        }
     }
 
     private void FixedUpdate()
     {
-        if (gameManager.gameRunning)
+        int timeInSecond = Mathf.FloorToInt(enemyTimeTurn % 60);
+
+        if (gameManager.gameRunning && (timeInSecond > enemyTurn))
         {
             EnemyMovement();
         }

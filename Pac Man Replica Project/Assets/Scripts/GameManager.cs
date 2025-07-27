@@ -12,9 +12,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject gameWinPanel;
     [SerializeField] private AudioSource backToLobbySound;
+    [SerializeField] private AudioSource pauseSound;
+    [SerializeField] private AudioSource winningGameSound;
     private int score;
     private int startingScore = 0;
+    private int numOfCoin;
     private bool gamePaused;
     private float delay = 1f;
 
@@ -30,6 +34,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         PauseGame();
+
+        numOfCoin = GameObject.FindObjectsOfType<CoinController>().Length;
+
+        GameWin();
     }
 
     private void PauseGame()
@@ -38,6 +46,7 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.P) && !gamePaused)
             {
+                pauseSound.PlayOneShot(pauseSound.clip);
                 Time.timeScale = 0;
                 gamePaused = true;
                 pausePanel.SetActive(true);
@@ -47,6 +56,7 @@ public class GameManager : MonoBehaviour
 
     public void ResumeGame()
     {
+        pauseSound.PlayOneShot(pauseSound.clip);
         Time.timeScale = 1;
         gamePaused = false;
         pausePanel.SetActive(false);
@@ -56,6 +66,16 @@ public class GameManager : MonoBehaviour
     {
         score += scoreToAdd;
         scoreText.text = $"Score: {score}";
+    }
+
+    public void GameWin()
+    {
+        if (numOfCoin < 1 && gameRunning)
+        {
+            winningGameSound.PlayOneShot(winningGameSound.clip, 1f);
+            gameWinPanel.SetActive(true);
+            gameRunning = false;
+        }
     }
 
     public void GameOver()

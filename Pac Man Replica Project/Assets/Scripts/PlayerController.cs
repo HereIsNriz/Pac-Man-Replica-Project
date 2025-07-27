@@ -42,6 +42,11 @@ public class PlayerController : MonoBehaviour
         {
             PlayerMovement();
         }
+        else
+        {
+            speed = 0;
+            playerRb.velocity = Vector3.zero;
+        }
     }
 
     private void PlayerMovement()
