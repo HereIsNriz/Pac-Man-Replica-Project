@@ -6,7 +6,6 @@ public class CoinController : MonoBehaviour
 {
     //
 
-    [SerializeField] private float rotationSpeed;
     private GameManager gameManager;
     private int scoreFromCoin = 10;
 
@@ -19,15 +18,7 @@ public class CoinController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.gameRunning)
-        {
-            RotateCoin();
-        }
-    }
 
-    private void RotateCoin()
-    {
-        transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
