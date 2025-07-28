@@ -60,6 +60,7 @@ public class EnemyController : MonoBehaviour
             {
                 enemyDeadSound.PlayOneShot(enemyDeadSound.clip);
                 transform.position = startPos;
+                transform.rotation = Quaternion.identity;
                 gameManager.UpdateScore(scoreFromEnemy);
             }
         }
