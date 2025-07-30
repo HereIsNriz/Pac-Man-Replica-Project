@@ -29,7 +29,6 @@ public class PlayButton : MonoBehaviour
 
     public void ExitGame()
     {
-        // Application.Quit();
         startingGameSound.PlayOneShot(startingGameSound.clip, 1f);
         StartCoroutine(DelayBeforeExitting());
     }
@@ -45,6 +44,6 @@ public class PlayButton : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
     }
 }
